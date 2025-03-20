@@ -1,6 +1,7 @@
 import { get, set, ref, query, equalTo, orderByChild, update } from "firebase/database";
 import { db } from "../config/firebase-config";
 
+
 export const getUserByHandle = async (handle) => {
     const useRef = ref(db,`users/${handle}`);
     
@@ -32,3 +33,8 @@ export const createUserHandle = async (firstName, lastName, username, uid, email
 export const getUserData = (uid) => {
     return get(query(ref(db, `users`), orderByChild('uid'), equalTo(uid)));
 }
+
+export const updateUser = async (username, userData) => {
+    const userRef = ref(db, `users/${username}`);
+    await update(userRef, userData);
+};

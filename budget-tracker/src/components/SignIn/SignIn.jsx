@@ -1,6 +1,5 @@
-import React, { useState } from 'react'
-import { useContext } from 'react';
-import { Link } from "react-router-dom";
+import React, { useState, useContext, useEffect } from 'react'
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { AppContext } from '../../context/AppContext';
 import { loginUser } from '../../services/auth-service';
 import { getUserData } from '../../services/user-services';
@@ -14,22 +13,39 @@ const SignIn = () => {
     });
     const [error, setError] = useState("");
 
+    
+
+
+    const navigate = useNavigate();
+    const location = useLocation();
+
     const updateForm = (prop) => (e) => {
         setForm({ ...form, [prop]: e.target.value });
     };
 
-    const login = async () => {
+    useEffect(() => {
+        if (user) {
+            navigate(location.state?.from.pathname || "/profile");
+        }
+    }, [location.state?.from.pathname, navigate, user]);
+
+    const login = async (event) => {
+        event.preventDefault();
         try {
             const credentials = await loginUser(form.email, form.password);
             const snapshot = await getUserData(credentials.user.uid);
             const userData = snapshot.val()[Object.keys(snapshot.val())[0]];
             setContext({user: credentials.user, userData: userData})
+            console.log("User Data before navigate:");
+            navigate("/profile");
 
         } catch (error) {
             setError("Invalid email or password");
             console.log(error);
         }
     }
+
+    
 
   return (
     <form onSubmit={login}>
@@ -47,7 +63,7 @@ const SignIn = () => {
      <button type="submit">Sign In</button>
 
      <p>Don't have an account? <Link to="/register">Register here</Link></p>
-
+     {error && <p style={{ color: "red", fontSize: "14px" }}>{error}</p>}
     </form>
     
   )

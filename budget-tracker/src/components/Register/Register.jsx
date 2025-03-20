@@ -24,13 +24,17 @@ import { useNavigate } from "react-router-dom";
         setError("");
     };
 
-    const register = async () => {
+    const register = async (event) => {
+
+        event.preventDefault(); // Спира презареждането на страницата
+        setError(""); // Изчиства предишните грешки
+
         if (form.firstName.length < 4 || form.firstName.length > 12) {
             setError("First name must be unique and have between 4 and 12 symbols!");
             return;
         }
 
-        if (form.lastName.length < 5 || form.lastName.length < 12) {
+        if (form.lastName.length < 4 || form.lastName.length > 12) {
             setError("Family name must be unique and have between 4 and 12 symbols!")
             return;
         }
@@ -52,13 +56,13 @@ import { useNavigate } from "react-router-dom";
             return;
         }
 
-        if (form.password) {
+        if (!form.password) {
             setError("Password is required!");
             return;
         }
 
         try {
-            const user = await getUserByHandleSnapshot(user.handle); // user sevrisec.js napishi go
+            const user = await getUserByHandleSnapshot(form.handle); // user sevrisec.js napishi go
 
             if (user.exists()) {
                 console.log(user.val());
@@ -77,7 +81,18 @@ import { useNavigate } from "react-router-dom";
                 form.phoneNumber
             );
 
-            setContext({user, userData: null });
+            const newUserData = {
+                firstName: form.firstName,
+                lastName: form.lastName,
+                handle: form.handle,
+                email: form.email,
+                phoneNumber: form.phoneNumber,
+                uid: credentials.user.uid,
+            };
+        
+            // Задаваме `userData` правилно
+            setContext({ user: credentials.user, userData: newUserData });
+
             navigate("/profile");
         } catch (error) {
             setError(error.message);
@@ -92,33 +107,33 @@ import { useNavigate } from "react-router-dom";
         {error &&  <p style={{ color: "red" }} >{error}</p>}
 
         <div>
-        <label>First Name:</label>
-        <input type="text" value={form.firstName} onChange={updateForm("firstName")} />
+        <label htmlFor="firstName" >First Name:</label>
+        <input type="text" value={form.firstName} id="firstName" autoComplete="given-name" onChange={updateForm("firstName")} />
       </div>
 
       <div>
-        <label>Last Name:</label>
-        <input type="text" value={form.lastName} onChange={updateForm("lastName")} />
+        <label htmlFor="lastName" >Last Name:</label>
+        <input type="text" value={form.lastName} id="lastName" autoComplete="family-name" onChange={updateForm("lastName")} />
       </div>
 
       <div>
-        <label>User Name:</label>
-        <input type="text" value={form.handle} onChange={updateForm("handle")} />
+        <label htmlFor="username" >User Name:</label>
+        <input type="text" value={form.handle} id="username" autoComplete="username" onChange={updateForm("handle")} />
       </div>
 
       <div>
-        <label>Email</label>
-        <input type="text" value={form.email} onChange={updateForm("email")} />
+        <label htmlFor="email" >Email</label>
+        <input type="text" value={form.email} id="email" autoComplete="email" onChange={updateForm("email")} />
       </div>
 
       <div>
-        <label>Phone Number</label>
-        <input type="text" value={form.phoneNumber} onChange={updateForm("phoneNumber")} />
+        <label htmlFor="phoneNumber" >Phone Number</label>
+        <input type="text" value={form.phoneNumber} id="phoneNumber" autoComplete="tel" onChange={updateForm("phoneNumber")} />
       </div>
 
       <div>
-        <label>Password</label>
-        <input type="text" value={form.password} onChange={updateForm("password")} />
+        <label htmlFor="password" >Password</label>
+        <input type="text" value={form.password} id="password" autoComplete="new-password" onChange={updateForm("password")} />
       </div>
 
       <button type="submit">Register</button>
