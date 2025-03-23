@@ -11,6 +11,9 @@ import Profile from './components/Profile/Profile'
 import { getUserData } from './services/user-services'
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth } from './config/firebase-config';
+import AddTransaction from './components/addTransaction/addTransaction'
+import TransactionList from './components/TransactionList/TransactionList'
+import Statistic from './components/Statistic/Statistic'
 
 function App() {
 
@@ -41,6 +44,9 @@ function App() {
                 <Route path='/register' element={< Register />} />
                 <Route path='/signin' element={< SignIn />} />
                 <Route path='/profile' element={< Profile />} />
+                <Route path='/transactions' element={<AddTransaction />} />
+                <Route path='/transactionsList' element={<TransactionList />} />
+                <Route path='/statistics' element={<Statistic />} />
             </Routes>
         </AppContext.Provider>
     </BrowserRouter>
