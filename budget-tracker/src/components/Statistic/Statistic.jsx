@@ -1,6 +1,6 @@
 import React from 'react'
 
-function Statistic() {
+const Statistic = () => {
   return (
     <div style={{ textAlign: "center", marginTop: "20px" }}>
       <h2>📊 Balance</h2>

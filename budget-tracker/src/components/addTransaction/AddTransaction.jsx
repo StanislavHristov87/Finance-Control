@@ -1,25 +1,64 @@
-import React from 'react'
 
-function AddTransaction() {
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        alert("Transactions will be added soon!")
+import { addTransaction } from "../../services/transaction-services";
+import { useNavigate } from "react-router-dom";
+
+const AddTransaction = ({ transaction, setTransaction } ) => {
+
+
+        const navigate = useNavigate();
+
+        const handleChange = (e) => {
+            setTransaction({
+                ...transaction,
+                [e.target.name]: e.target.value
+            });
+        };
+
+
+
+   const handleSubmit = async (e) => {
+    e.preventDefault();
+    console.log("Submitting transaction:", transaction); 
+    try {
+        await addTransaction(transaction);
+        alert("transaction added successfully!");
+
+        navigate("/transactionsList")
+    } catch (error) {
+        console.error("Error adding transaction:", error.message); 
+        alert("Error adding transaction!", error)
     }
+   }
+    
+
+
   return (
     <form onSubmit={handleSubmit} style={{maxWidth: "400px", margin: "auto"}} >
         <h2>Adding transactions</h2>
 
     <label>Sum</label>
-    <input type="number" placeholder='add a sum' required />
+    <input 
+    type="number" 
+    name="sum" 
+    placeholder='Add a sum' 
+    value={transaction.sum} 
+    onChange={handleChange} 
+    required />
 
     <label>Type of transaction</label>
-    <select>
+    <select 
+    name="type" 
+    value={transaction.type} 
+    onChange={handleChange}>
         <option value="income">Income</option>
         <option value="expense">Expense</option>
     </select>
 
     <label>Category</label>
-    <select>
+    <select 
+    name="category" 
+    value={transaction.category} 
+    onChange={handleChange} >
         <option value="salary">Salary</option>
         <option value="food">Food</option>
         <option value="rent">Rent</option>
@@ -27,7 +66,12 @@ function AddTransaction() {
     </select>
 
     <label>Info</label>
-    <input type="tex" placeholder='Info' />
+    <input 
+    type="text" 
+    name="info" 
+    value={transaction.info} 
+    placeholder='info' 
+    onChange={handleChange} />
 
         <button type='submit'>Add</button>
 
@@ -35,4 +79,4 @@ function AddTransaction() {
   )
 }
 
-export default AddTransaction
+export default AddTransaction;

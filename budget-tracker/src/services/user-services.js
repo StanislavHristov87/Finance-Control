@@ -1,5 +1,6 @@
 import { get, set, ref, query, equalTo, orderByChild, update } from "firebase/database";
 import { db } from "../config/firebase-config";
+import { addDoc, collection } from "firebase/firestore";
 
 
 export const getUserByHandle = async (handle) => {
@@ -38,3 +39,4 @@ export const updateUser = async (username, userData) => {
     const userRef = ref(db, `users/${username}`);
     await update(userRef, userData);
 };
+

@@ -21,6 +21,13 @@ function App() {
     user: null,
     userData: null,
   });
+
+  const [transaction, setTransaction] = useState({
+    sum: '',
+    type: 'income',
+    category: 'salary',
+    info: ''
+});
   
   const [user, loading, error] = useAuthState(auth);
   useEffect(() => {
@@ -44,8 +51,8 @@ function App() {
                 <Route path='/register' element={< Register />} />
                 <Route path='/signin' element={< SignIn />} />
                 <Route path='/profile' element={< Profile />} />
-                <Route path='/transactions' element={<AddTransaction />} />
-                <Route path='/transactionsList' element={<TransactionList />} />
+                <Route path='/transactions' element={<AddTransaction transaction={transaction} setTransaction={setTransaction} />} />
+                <Route path='/transactionsList' element={<TransactionList  />} />
                 <Route path='/statistics' element={<Statistic />} />
             </Routes>
         </AppContext.Provider>
