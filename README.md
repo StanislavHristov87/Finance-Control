@@ -23,8 +23,8 @@ Line chart (линейна графика) за приходи и разходи
 ✅ Автентикация с Firebase (Google/Email)
 
 Регистрация и вход с Firebase Authentication
-Свързване на потребителските данни с Firestore
-✅ Съхранение на данни в Firestore
+Свързване на потребителските данни с Firebase realtime data base
+✅ Съхранение на данни в Firebase realtime data baseestore
 
 Всеки потребител вижда само своите записи
 Данните се пазят сигурно в базата

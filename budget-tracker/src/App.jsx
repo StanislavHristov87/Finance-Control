@@ -10,10 +10,10 @@ import Home from './components/Home/Home'
 import Profile from './components/Profile/Profile'
 import { getUserData } from './services/user-services'
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { auth } from './config/firebase-config';
+import { auth, db } from './config/firebase-config';
 import AddTransaction from './components/addTransaction/addTransaction'
 import TransactionList from './components/TransactionList/TransactionList'
-import Statistic from './components/Statistic/Statistic'
+import { onValue, ref } from 'firebase/database'
 
 function App() {
 
@@ -28,6 +28,26 @@ function App() {
     category: 'salary',
     info: ''
 });
+
+const [transactions, setTransactions] = useState([]);
+
+        useEffect(() => {
+
+            const transactionsRef = ref( db, "transactions" );
+
+            const unsubscribe = onValue(transactionsRef, (snapshot) => {
+
+                if (snapshot.exists()) {
+                    const data = snapshot.val();
+                    const transactionArray = Object.values(data);
+                    setTransactions(transactionArray);
+
+                } else {
+                    setTransactions([]);
+                }
+            });
+            return () => unsubscribe();
+        }, []);
   
   const [user, loading, error] = useAuthState(auth);
   useEffect(() => {
@@ -52,8 +72,7 @@ function App() {
                 <Route path='/signin' element={< SignIn />} />
                 <Route path='/profile' element={< Profile />} />
                 <Route path='/transactions' element={<AddTransaction transaction={transaction} setTransaction={setTransaction} />} />
-                <Route path='/transactionsList' element={<TransactionList  />} />
-                <Route path='/statistics' element={<Statistic />} />
+                <Route path='/transactionsList' element={<TransactionList transactions={transactions} />} />
             </Routes>
         </AppContext.Provider>
     </BrowserRouter>
