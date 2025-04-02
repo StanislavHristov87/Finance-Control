@@ -24,7 +24,7 @@ Line chart (линейна графика) за приходи и разходи
 
 Регистрация и вход с Firebase Authentication
 Свързване на потребителските данни с Firebase realtime data base
-✅ Съхранение на данни в Firebase realtime data baseestore
+✅ Съхранение на данни в Firebase realtime data base
 
 Всеки потребител вижда само своите записи
 Данните се пазят сигурно в базата
