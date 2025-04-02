@@ -26,7 +26,8 @@ function App() {
     sum: '',
     type: 'income',
     category: 'salary',
-    info: ''
+    info: '',
+    date: ''
 });
 
 const [transactions, setTransactions] = useState([]);

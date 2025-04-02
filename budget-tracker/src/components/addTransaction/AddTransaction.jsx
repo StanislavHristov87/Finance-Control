@@ -73,6 +73,16 @@ const AddTransaction = ({ transaction, setTransaction } ) => {
     placeholder='info' 
     onChange={handleChange} />
 
+<label>Date</label>
+<input 
+    type="date" 
+    name="date" 
+    value={transaction.date}
+    placeholder="date"
+    onChange={handleChange}
+    required
+/>
+
         <button type='submit'>Add</button>
 
     </form>
