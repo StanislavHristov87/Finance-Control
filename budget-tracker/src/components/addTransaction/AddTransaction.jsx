@@ -60,8 +60,11 @@ const AddTransaction = ({ transaction, setTransaction } ) => {
     value={transaction.category} 
     onChange={handleChange} >
         <option value="salary">Salary</option>
+        <option value="bonuses">Bonuses</option>
+        <option value="otherIncome">Other income</option>
         <option value="food">Food</option>
         <option value="rent">Rent</option>
+        <option value="transport">Transport</option>
         <option value="entertainment">Entertainment</option>
     </select>
 
