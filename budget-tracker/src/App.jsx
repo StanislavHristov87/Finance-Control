@@ -14,6 +14,7 @@ import { auth, db } from './config/firebase-config';
 import AddTransaction from './components/addTransaction/addTransaction'
 import TransactionList from './components/TransactionList/TransactionList'
 import { onValue, ref } from 'firebase/database'
+import FilteredTransactions from './components/FilteredTransactions/FilteredTransactions'
 
 function App() {
 
@@ -74,6 +75,7 @@ const [transactions, setTransactions] = useState([]);
                 <Route path='/profile' element={< Profile />} />
                 <Route path='/transactions' element={<AddTransaction transaction={transaction} setTransaction={setTransaction} />} />
                 <Route path='/transactionsList' element={<TransactionList transactions={transactions} />} />
+                <Route path='/filteredTransactions' element={<FilteredTransactions transactions={transactions} />} />
             </Routes>
         </AppContext.Provider>
     </BrowserRouter>
