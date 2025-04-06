@@ -4,58 +4,71 @@ const FilteredTransactions = ({ transactions }) => {
 
     const [startDate, setStartDate] = useState("");
     const [endDate, setEndDate] = useState("");
+    const [filteredTransactions, setFilteredTransactions] = useState([]);
+    const [showResult, setShowResult] = useState(false);
 
-    const handleStartDateChange = (e) => {
-        e.preventDefault();
-        setStartDate(e.target.value);
-    };
 
-    const handleEndDateChange = (e) => {
-        setEndDate(e.target.value);
-    };
 
-    const filtered = transactions.filter((transaction) => {
-        const transactionDate = new Date(transaction.date);
-        const from = startDate ? new Date(startDate) : null;
-        const to = endDate ? new Date(endDate) : null;
+    const handleFilter = () => {
 
-        return (
-            (!from || transactionDate >= from) && (!to || transactionDate <= to)
-        )
-    });
+        if (!startDate || !endDate) {
+            alert("Please select dates !");
+            return;
+        }
+
+        const filtered = transactions.filter(transaction => {
+            const date = new Date(transaction.date);
+            return date >= new Date(startDate) && date <= new Date(endDate);
+        });
+
+        setFilteredTransactions(filtered);
+        setShowResult(true);
+    }
+
+   
 
 
 
   return (
-    <div style={{ padding: "1rem", border: "1px solid #ddd", marginTop: "1rem" }} >
+    <div style={{ maxWidth: "600px", margin: "auto", padding: "20px" }}>
+      <h2>Filter transactions by date</h2>
 
-    <h1>Filter by transactions date</h1>
+      <label>Start date:</label>
+      <input
+        type="date"
+        value={startDate}
+        onChange={(e) => setStartDate(e.target.value)}
+      />
 
-    <div>
-    <label>From Date:</label>
-    <input type="date" value={startDate} onChange={handleStartDateChange}/>
+      <br />
 
-    <label>To Date:</label>
-    <input type="date" value={endDate} onChange={handleEndDateChange} />
-    </div>
+      <label>End date:</label>
+      <input
+        type="date"
+        value={endDate}
+        onChange={(e) => setEndDate(e.target.value)}
+      />
 
+      <br />
+      <button onClick={handleFilter}>Show results</button>
 
-    <h3 style={{color: "yellow"}} >Results:</h3>
-
-    {filtered.length === 0 ? (
-        <p>No transactions for this period!</p>
-    ) : (
-        <ul>
-            {filtered.map((t, index) => (
-                <li key={index}>
-                    <strong>{t.category}</strong> - {t.sum} lv ({t.type}) - {t.date}
-                </li>
-            ))}
-        </ul>
-    )
-
-    }
-
+      {showResult && (
+        <div>
+          <h3>Results:</h3>
+          {filteredTransactions.length === 0 ? (
+            <p>No transactions for this period</p>
+          ) : (
+            filteredTransactions.map((transaction, index) => (
+              <div key={index} style={{ borderBottom: "1px solid #ccc", marginTop: "10px" }}>
+                <p><strong>Sum:</strong> {transaction.sum} лв</p>
+                <p><strong>Category:</strong> {transaction.category}</p>
+                <p><strong>Type:</strong> {transaction.type}</p>
+                <p><strong>Date:</strong> {transaction.date}</p>
+              </div>
+            ))
+          )}
+        </div>
+      )}
     </div>
   )
 }
