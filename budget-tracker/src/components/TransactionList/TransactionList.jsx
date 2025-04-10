@@ -73,14 +73,21 @@ const TransactionList = ({ transactions }) => {
         <Legend />
     </PieChart>
             </div>
-
             <div>
-            <h3 style={{color: "yellow"}} > Balance</h3>
+              <h1 style={{backgroundColor: "black",
+                 color: "green",
+                 borderRadius: '38px'
+                 
+                 }} > Balance</h1>
 
-            <p style={{color: "yellow"}} >
-            { total.income - total.expense
-           }
-            </p>
+               <p style={{backgroundColor: "green",
+                 color: "black",
+                 borderRadius: '38px'
+                 
+                 }} >
+              { total.income - total.expense
+              }
+               </p>
            
            
            

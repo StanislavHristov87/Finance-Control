@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 const FilteredTransactions = ({ transactions }) => {
 
@@ -7,7 +7,19 @@ const FilteredTransactions = ({ transactions }) => {
     const [filteredTransactions, setFilteredTransactions] = useState([]);
     const [showResult, setShowResult] = useState(false);
 
+    useEffect(() => {
+      
+    if (startDate && endDate && transactions.length > 0) {
+        const filtered = transactions.filter(transaction => {
+            const date = new Date(transaction.date);
+            return date >= new Date(startDate) && date <= new Date(endDate);
+        });
 
+        setFilteredTransactions(filtered);
+    }
+    
+    }, [startDate, endDate, transactions])
+    
 
     const handleFilter = () => {
 
@@ -15,13 +27,7 @@ const FilteredTransactions = ({ transactions }) => {
             alert("Please select dates !");
             return;
         }
-
-        const filtered = transactions.filter(transaction => {
-            const date = new Date(transaction.date);
-            return date >= new Date(startDate) && date <= new Date(endDate);
-        });
-
-        setFilteredTransactions(filtered);
+       
         setShowResult(true);
     }
 
@@ -31,35 +37,61 @@ const FilteredTransactions = ({ transactions }) => {
 
   return (
     <div style={{ maxWidth: "600px", margin: "auto", padding: "20px" }}>
-      <h2>Filter transactions by date</h2>
+      <h1 style={{color: "green", }}>Filter transactions by date</h1>
 
-      <label>Start date:</label>
+      <label style={{color: "blue", 
+          fontSize: "28px",
+          cursor: "pointer"
+          }} >Start date:</label>
       <input
         type="date"
         value={startDate}
         onChange={(e) => setStartDate(e.target.value)}
+        style={{borderRadius: "18px",
+            fontSize: "23px",
+            marginLeft: "28px",
+            marginTop: "50px",
+            cursor: "pointer"
+        }}
       />
 
       <br />
 
-      <label>End date:</label>
+      <label style={{color: "black", fontSize: "28px", cursor: "pointer"
+      }} >End date:</label>
       <input
         type="date"
         value={endDate}
         onChange={(e) => setEndDate(e.target.value)}
+        style={{borderRadius: "18px",
+            fontSize: "23px",
+            marginLeft: "28px",
+            marginTop: "50px",
+            cursor: "pointer"
+        }}
       />
 
       <br />
-      <button onClick={handleFilter}>Show results</button>
+      <button onClick={handleFilter} style={{marginTop: "200px", 
+      marginBottom: "100px",
+        fontSize: "23px",
+        backgroundColor: "blue",
+        color: ""
+        }} >Show results</button>
 
       {showResult && (
-        <div>
-          <h3>Results:</h3>
+        <div >
+          <h3 style={{color: "black"}}>Results:</h3>
           {filteredTransactions.length === 0 ? (
             <p>No transactions for this period</p>
           ) : (
             filteredTransactions.map((transaction, index) => (
-              <div key={index} style={{ borderBottom: "1px solid #ccc", marginTop: "10px" }}>
+              <div key={index} style={{ borderBottom: "1px solid #ccc"
+              , 
+               backgroundColor: "black",
+               borderRadius: "18px",
+               color: "yellow"
+              }}>
                 <p><strong>Sum:</strong> {transaction.sum} лв</p>
                 <p><strong>Category:</strong> {transaction.category}</p>
                 <p><strong>Type:</strong> {transaction.type}</p>
