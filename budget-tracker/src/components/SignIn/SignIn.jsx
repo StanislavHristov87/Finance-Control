@@ -3,6 +3,7 @@ import { Link, useNavigate, useLocation } from "react-router-dom";
 import { AppContext } from '../../context/AppContext';
 import { loginUser } from '../../services/auth-service';
 import { getUserData } from '../../services/user-services';
+import '..//SignIn/SignIn.css';
 
 const SignIn = () => {
 
@@ -48,21 +49,43 @@ const SignIn = () => {
     
 
   return (
-    <form onSubmit={login}>
-        <h2>Sign In</h2>
+    <form onSubmit={login} className='signin' >
+        <h1 style={{color: "black"}} >Sign In</h1>
      <div>
-        <label>Email:</label>
-        <input type="text" value={form.email} onChange={updateForm("email")} />
+        <label style={{fontSize: "28px" ,
+             marginLeft: "10px",
+              marginRight: "35px",
+              color: "black"
+              }} >Email:</label>
+        <input style={{ fontSize: "18px",
+             marginRight: "45px",
+              borderRadius: "15px"
+               }} type="text" value={form.email} onChange={updateForm("email")} />
      </div>
 
      <div>
-        <label>Password:</label>
-        <input type="text" value={form.password} onChange={updateForm("password")} />
+        <label  
+        style={{fontSize: "28px" ,
+            marginLeft: "10px",
+             marginRight: "15px",
+             color: "black"
+             }}
+        >Password:</label>
+        <input 
+        style={{ fontSize: "18px",
+            marginRight: "15px",
+             borderRadius: "15px"
+              }}
+        type="text" value={form.password} onChange={updateForm("password")} />
      </div>
 
-     <button type="submit">Sign In</button>
+     <button style={ {marginTop: "18px"}} type="submit">Sign In</button>
 
-     <p>Don't have an account? <Link to="/register">Register here</Link></p>
+     <p style={{color: "black",
+         fontSize: "25px", 
+         marginLeft: "18px"}} >Don't have an account?
+         <br />
+          <Link style={{color: "yellow"}} to="/register">Register here</Link></p>
      {error && <p style={{ color: "red", fontSize: "14px" }}>{error}</p>}
     </form>
     

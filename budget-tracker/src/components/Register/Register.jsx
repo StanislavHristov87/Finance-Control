@@ -102,41 +102,41 @@ import { useNavigate } from "react-router-dom";
   return (
     
     <form onSubmit={register}>
-        <h2>Register</h2>
+        <h1 style={{color: "black"}} >Register</h1>
 
         {error &&  <p style={{ color: "red" }} >{error}</p>}
 
         <div>
-        <label htmlFor="firstName" >First Name:</label>
-        <input type="text" value={form.firstName} id="firstName" autoComplete="given-name" onChange={updateForm("firstName")} />
+        <label style={{color: "black", fontSize: "28px"}} htmlFor="firstName" >First Name :</label>
+        <input style={{marginLeft: "18px", borderRadius: "18px", fontSize: "18px"}} type="text" value={form.firstName} id="firstName" autoComplete="given-name" onChange={updateForm("firstName")} />
       </div>
 
       <div>
-        <label htmlFor="lastName" >Last Name:</label>
-        <input type="text" value={form.lastName} id="lastName" autoComplete="family-name" onChange={updateForm("lastName")} />
+        <label style={{color: "black", fontSize: "28px"}}  htmlFor="lastName" >Last Name :</label>
+        <input style={{marginLeft: "18px", borderRadius: "18px", fontSize: "18px"}}  type="text" value={form.lastName} id="lastName" autoComplete="family-name" onChange={updateForm("lastName")} />
       </div>
 
       <div>
-        <label htmlFor="username" >User Name:</label>
-        <input type="text" value={form.handle} id="username" autoComplete="username" onChange={updateForm("handle")} />
+        <label style={{color: "black", fontSize: "28px"}}  htmlFor="username" >User Name :</label>
+        <input style={{marginLeft: "18px", borderRadius: "18px", fontSize: "18px"}}  type="text" value={form.handle} id="username" autoComplete="username" onChange={updateForm("handle")} />
       </div>
 
       <div>
-        <label htmlFor="email" >Email</label>
-        <input type="text" value={form.email} id="email" autoComplete="email" onChange={updateForm("email")} />
+        <label style={{color: "black", fontSize: "28px"}}  htmlFor="email" >Email :</label>
+        <input style={{marginLeft: "88px", borderRadius: "18px", fontSize: "18px"}}  type="text" value={form.email} id="email" autoComplete="email" onChange={updateForm("email")} />
       </div>
 
       <div>
-        <label htmlFor="phoneNumber" >Phone Number</label>
-        <input type="text" value={form.phoneNumber} id="phoneNumber" autoComplete="tel" onChange={updateForm("phoneNumber")} />
+        <label style={{color: "black", fontSize: "28px"}}  htmlFor="phoneNumber" >Phone Number :</label>
+        <input style={{marginLeft: "8px", borderRadius: "18px", fontSize: "18px"}}  type="text" value={form.phoneNumber} id="phoneNumber" autoComplete="tel" onChange={updateForm("phoneNumber")} />
       </div>
 
       <div>
-        <label htmlFor="password" >Password</label>
-        <input type="text" value={form.password} id="password" autoComplete="new-password" onChange={updateForm("password")} />
+        <label style={{color: "black", fontSize: "28px"}}  htmlFor="password" >Password :</label>
+        <input style={{marginLeft: "58px", borderRadius: "18px", fontSize: "18px"}}  type="text" value={form.password} id="password" autoComplete="new-password" onChange={updateForm("password")} />
       </div>
 
-      <button type="submit">Register</button>
+      <button style={{marginTop: "50px"}} type="submit">Register</button>
 
     </form>
   )
