@@ -67,8 +67,7 @@ import { useNavigate } from "react-router-dom";
                 let avatarUrl = userData.avatarUrl;
 
                 if (file) {
-                    const storageReference = storageRef(storage, `
-                        avatars/${userData.uid}`);
+                    const storageReference = storageRef(storage, `avatars/${userData.uid}`);
                         await uploadBytes(storageReference, file);
                         avatarUrl = await getDownloadURL(storageReference);
                 };
@@ -99,15 +98,31 @@ import { useNavigate } from "react-router-dom";
           });
       };
 
+      const handleNavigate = () => {
+        navigate("/transactions")
+      }
+
 
 
   return (
     <form onSubmit={submit} className="profile-form">
 
 <div>
-    <label>Profile Picture:</label>
+    <label
+    style={{
+        fontSize: "53px",
+         textAlign: "center",
+        marginLeft: "50px",
+        color: "black"
+        
+        }}
+    >Profile Picture:</label>
     {userData?.avatarUrl ? (
-        <img src={userData.avatarUrl} alt="Avatar" width="100" height="100" style={{ borderRadius: "50%" }} />
+        <img src={userData.avatarUrl} alt="Avatar" width="100" height="100" style={{ 
+            borderRadius: "50%",
+            marginLeft: "50px"
+        
+        }} />
     ) : (
         <p>No profile picture</p>
     )}
@@ -115,27 +130,84 @@ import { useNavigate } from "react-router-dom";
 
 
       <div>
-        <label>First Name:</label>
-        <input type="text" value={form.firstName} onChange={updateForm("firstName")} required />
+        <label style={{color: "black", fontSize: "25px"}} >First Name:</label>
+        <input 
+        type="text" 
+        value={form.firstName} 
+        onChange={updateForm("firstName")} 
+        required
+        style={{color: "white",
+            fontSize: "18px",
+             borderRadius: "18px", 
+             marginLeft: "20px",
+            marginTop: "53px"
+            }}
+        />
       </div>
 
       <div>
-        <label>Last Name:</label>
-        <input type="text" value={form.lastName} onChange={updateForm("lastName")} required />
+        <label style={{color: "black", fontSize: "25px"}} >Last Name:</label>
+        <input 
+        type="text" 
+        value={form.lastName} 
+        onChange={updateForm("lastName")} 
+        required 
+        style={{color: "white",
+            fontSize: "18px",
+             borderRadius: "18px", 
+             marginLeft: "20px",
+            marginTop: "11px"
+            }}
+        />
       </div>
 
       <div>
-        <label>Phone Number:</label>
-        <input type="text" value={form.phoneNumber} onChange={updateForm("phoneNumber")} required />
+        <label style={{color: "black", fontSize: "25px"}} >Phone Number:</label>
+        <input 
+        type="text" 
+        value={form.phoneNumber} 
+        onChange={updateForm("phoneNumber")} 
+        required 
+        style={{color: "white",
+             fontSize: "18px",
+              borderRadius: "18px", 
+              marginLeft: "20px",
+               marginTop: "11px"
+            }}
+        />
       </div>
 
       <div>
-        <label>Profile Picture:</label>
-        <input type="file" onChange={handleFileChange} />
+        <label style={{color: "black", marginLeft: "93px", fontSize: "25px"}} >Profile Picture :</label>
+        <input 
+        type="file" 
+        onChange={handleFileChange} 
+        style={{color: "white",
+            fontSize: "18px",
+             borderRadius: "18px", 
+             marginLeft: "20px",
+            marginTop: "11px"
+            }}
+        />
       </div>
 
-      <button type="submit">Save</button>
-      <button type="button" onClick={handleLogout}>Logout</button>
+      <button type="submit" 
+      style={{
+        marginTop: "100px",
+         marginRight: "50px",
+          fontSize: "18px"}}
+          >Save</button>
+      <button 
+      type="button" 
+      onClick={handleLogout}
+      style={{
+        marginTop: "100px",
+         marginRight: "50px",
+          fontSize: "18px"}}
+      
+      >Logout</button>
+
+      <button type="button" onClick={handleNavigate} >new transactions</button>
 
 
       {showAlert && <p>Profile updated successfully!</p>}

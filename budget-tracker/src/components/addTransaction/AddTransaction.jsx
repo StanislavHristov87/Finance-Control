@@ -1,9 +1,12 @@
 
 import { addTransaction } from "../../services/transaction-services";
 import { useNavigate } from "react-router-dom";
+import { AppContext } from "../../context/AppContext";
+import { useContext } from "react";
 
 const AddTransaction = ({ transaction, setTransaction } ) => {
 
+    const { user } = useContext(AppContext);
 
         const navigate = useNavigate();
 
@@ -20,7 +23,7 @@ const AddTransaction = ({ transaction, setTransaction } ) => {
     e.preventDefault();
     console.log("Submitting transaction:", transaction); 
     try {
-        await addTransaction(transaction);
+        await addTransaction(user.uid, transaction);
         alert("transaction added successfully!");
 
         navigate("/transactionsList")
@@ -50,7 +53,7 @@ const AddTransaction = ({ transaction, setTransaction } ) => {
     style={{
         borderRadius: '38px',
         fontSize: "20px",
-        backgroundColor: "white"
+        backgroundColor: "blue"
     }}
     />
     
@@ -104,7 +107,7 @@ const AddTransaction = ({ transaction, setTransaction } ) => {
     style={{
         borderRadius: '38px',
         fontSize: "20px",
-        backgroundColor: "white"
+        backgroundColor: "blue"
     }}
     />
 

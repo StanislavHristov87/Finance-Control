@@ -5,7 +5,7 @@ import './App.css'
 import Register from './components/Register/Register'
 import SignIn from './components/SignIn/SignIn'
 import { AppContext } from './context/AppContext'
-import { useState,useEffect } from 'react'
+import { useState,useEffect, useContext } from 'react'
 import Home from './components/Home/Home'
 import Profile from './components/Profile/Profile'
 import { getUserData } from './services/user-services'
@@ -15,6 +15,7 @@ import AddTransaction from './components/addTransaction/addTransaction'
 import TransactionList from './components/TransactionList/TransactionList'
 import { onValue, ref } from 'firebase/database'
 import FilteredTransactions from './components/FilteredTransactions/FilteredTransactions'
+
 
 function App() {
 
@@ -31,17 +32,35 @@ function App() {
     date: ''
 });
 
+
 const [transactions, setTransactions] = useState([]);
 
-        useEffect(() => {
+const [user, loading, error] = useAuthState(auth);
 
-            const transactionsRef = ref( db, "transactions" );
+useEffect(() => {
+  if (!loading && user) {
+    getUserData(user.uid)
+      .then(snapshot => {
+        if (snapshot.exists()) {
+          setContext({ user, userData: snapshot.val()[Object.keys(snapshot.val())[0]] });
+        }
+      })
+  }
+}, [user, loading]);
+
+
+        useEffect(() => {
+          
+          
+          if (!user) return; // Изчакай потребителя
+          const transactionsRef = ref(db, `users/${user.uid}/transactions`);
 
             const unsubscribe = onValue(transactionsRef, (snapshot) => {
 
                 if (snapshot.exists()) {
                     const data = snapshot.val();
                     const transactionArray = Object.values(data);
+                    
                     setTransactions(transactionArray);
 
                 } else {
@@ -49,19 +68,10 @@ const [transactions, setTransactions] = useState([]);
                 }
             });
             return () => unsubscribe();
-        }, []);
+        }, [user]);
   
-  const [user, loading, error] = useAuthState(auth);
-  useEffect(() => {
-    if (!loading && user) {
-      getUserData(user.uid)
-        .then(snapshot => {
-          if (snapshot.exists()) {
-            setContext({ user, userData: snapshot.val()[Object.keys(snapshot.val())[0]] });
-          }
-        })
-    }
-  }, [user, loading]);
+  
+
 
 
   return (

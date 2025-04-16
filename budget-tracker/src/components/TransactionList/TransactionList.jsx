@@ -1,104 +1,158 @@
 
+// import { PieChart, Pie, Cell, Tooltip, Legend } from "recharts";
+
+// const TransactionList = ({ transactions }) => {
+
+//     const totals = transactions.reduce((acc, transaction) => {
+//         if ( transaction.type === 'income' ) {
+//             acc.income += Number(transaction.sum)
+// ;        } else if ( transaction.type === 'expense' ) {
+//             acc.expense += Number(transaction.sum)
+//         }
+//         return acc;
+//     }, {income: 0, expense: 0})
+    
+//     // const total = transactions.reduce((acc, transaction) => {
+//     //     return acc + Number(transaction.sum); // Уверяваме се, че добавяме числовата стойност
+//     // }, 0);  // Началната стойност на acc е 0
+
+//     return (
+//         <div>
+//             {/* Показваме общата сума */}
+//             <h2>Обща сума на транзакциите: {totals.income - totals.expense}</h2>
+//         </div>
+    
+//     )
+  
+// }
+
+// export default TransactionList;
+
 import { PieChart, Pie, Cell, Tooltip, Legend } from "recharts";
 
+import { COLORS, EXPENSE_COLORS , BALANCE_COLORS} from "../../data/colors";
+
+
 const TransactionList = ({ transactions }) => {
+  // Смятаме тотали
+  const totals = transactions.reduce(
+    (acc, transaction) => {
+      if (transaction.type === "income") {
+        acc.income += Number(transaction.sum);
+      } else if (transaction.type === "expense") {
+        acc.expense += Number(transaction.sum);
+      }
+      return acc;
+    },
+    { income: 0, expense: 0 }
+  );
 
-    const total = transactions.reduce((acc, transaction) => {
-        if ( transaction.type === "income" ) {
-            acc.income += Number(transaction.sum);
-        } else if( transaction.type === "expense" ){
-            acc.expense += Number(transaction.sum);
-        }
-        return acc;
-    }, { income: 0, expense: 0 })
+  // Групиране по категории за разходи
+  const expenseData = transactions
+    .filter((t) => t.type === "expense")
+    .reduce((acc, t) => {
+      acc[t.category] = (acc[t.category] || 0) + Number(t.sum);
+      return acc;
+    }, {});
 
-        const categorizedExpenses = transactions.reduce((acc, transaction) => {
-            if (transaction.type === "expense") {
-                acc[transaction.category] = (acc[transaction.category] || 0)
-                 + Number(transaction.sum);
-            }
-            return acc;
-        }, {});
+  const expenseChart = Object.entries(expenseData).map(([key, value]) => ({
+    name: key,
+    value,
+  }));
 
-        const categorizedIncomes = transactions.reduce((acc, transaction) => {
-            if (transaction.type === "income") {
-                acc[transaction.category] = (acc[transaction.category] || 0)
-                + Number(transaction.sum)
-            }
-            return acc;
-        }, {});
+  // Групиране по категории за приходи
+  const incomeData = transactions
+    .filter((t) => t.type === "income")
+    .reduce((acc, t) => {
+      acc[t.category] = (acc[t.category] || 0) + Number(t.sum);
+      return acc;
+    }, {});
 
-        const expenseData = Object.entries(categorizedExpenses).map(([category, amount]) => ({
-            name: category,
-            value: amount
-        }));
-        
-        const incomeData = Object.entries(categorizedIncomes).map(([category, amount]) => ({
-            name: category,
-            value: amount
-        }));
-        
+  const incomeChart = Object.entries(incomeData).map(([key, value]) => ({
+    name: key,
+    value,
+  }));
+
+  const totalSumLeft = totals.income - totals.expense;
+
+  const data = [
+    { name: 'savedMoney', value: totalSumLeft },
+    {name: 'moneySpent', value: totals.expense }      
+  ];
+
+
 
   return (
-    
-  
-    
-        <div style={{ display: "flex", justifyContent: "space-around", alignItems: "center" }} >
-            
-            <div>
-
-            <h2 style={ {textAlign: "center", fontSize: "87px", color: "blue", fontWeight: "bold" } } >Statistics</h2>
-    
-    <h3 style={{textAlign: "left", fontSize: "31px", color: "green",  }} >Income</h3>
-    <PieChart width={400} height={300}>
-        <Pie data={incomeData} dataKey="value" nameKey="name" cx="50%" cy="50%" outerRadius={100} fill="#4CAF50" label>
-            {incomeData.map((entry, index) => (
-                <Cell key={`cell-${index}`} fill={["#4CAF50", "#81C784", "#66BB6A", "#388E3C"][index % 4]} />
+    <div style={{ display: "flex", justifyContent: "space-around", marginTop: 50 }}>
+      <div>
+        <h3 style={{ textAlign: "center", color: "green" }}>Income</h3>
+        <PieChart width={300} height={300}>
+          <Pie
+            data={incomeChart}
+            dataKey="value"
+            nameKey="name"
+            cx="50%"
+            cy="50%"
+            outerRadius={100}
+            label
+          >
+            {incomeChart.map((entry, index) => (
+              <Cell key={`cell-income-${index}`} fill={COLORS[index % COLORS.length]} />
             ))}
-        </Pie>
-        <Tooltip />
-        <Legend />
-    </PieChart>
-            </div>
+          </Pie>
+          <Tooltip />
+          <Legend />
+        </PieChart>
+      </div>
 
-            <div>
-            <h3 style={{textAlign: "right", fontSize: "31px", color: "red"}} >Expenses</h3>
-    <PieChart width={400} height={300}>
-        <Pie data={expenseData} dataKey="value" nameKey="name" cx="50%" cy="50%" outerRadius={100} fill="#FF5722" label>
-            {expenseData.map((entry, index) => (
-                <Cell key={`cell-${index}`} fill={["#FF5722", "#FF7043", "#F4511E", "#BF360C"][index % 4]} />
+      <div>
+        <h3 style={{ textAlign: "center", color: "red" }}>Expense</h3>
+        <PieChart width={300} height={300}>
+          <Pie
+            data={expenseChart}
+            dataKey="value"
+            nameKey="name"
+            cx="50%"
+            cy="50%"
+            outerRadius={100}
+            label
+          >
+            {expenseChart.map((entry, index) => (
+              <Cell key={`cell-expense-${index}`} fill={EXPENSE_COLORS[index % EXPENSE_COLORS.length]} />
             ))}
-        </Pie>
-        <Tooltip />
-        <Legend />
-    </PieChart>
-            </div>
-            <div>
-              <h1 style={{backgroundColor: "black",
-                 color: "green",
-                 borderRadius: '38px'
-                 
-                 }} > Balance</h1>
+          </Pie>
+          <Tooltip />
+          <Legend />
+        </PieChart>
+      </div>
 
-               <p style={{backgroundColor: "green",
-                 color: "black",
-                 borderRadius: '38px'
-                 
-                 }} >
-              { total.income - total.expense
-              }
-               </p>
-           
-           
-           
+      
+      <div>
+        <h3 style={{ textAlign: "center", color: "blue" }}>Total sum left</h3>
+        <PieChart width={300} height={300}>
+          <Pie
+            data={data}
+            dataKey="value"
+            nameKey="name"
+            cx="50%"
+            cy="50%"
+            outerRadius={100}
+            label
+          >
+            {data.map((entry, index) => (
+              <Cell key={`cell-expense-${index}`}
+               fill={BALANCE_COLORS[index % BALANCE_COLORS.length]} />
+            ))}
+          </Pie>
+          <Tooltip />
+          <Legend />
+        </PieChart>
+      </div>
+     
+    </div>
 
-            </div>
-            
-        </div>
-    );
     
-
-  
-}
+  );
+};
 
 export default TransactionList;

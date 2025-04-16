@@ -56,9 +56,9 @@ const SignIn = () => {
              marginLeft: "10px",
               marginRight: "35px",
               color: "black"
-              }} >Email:</label>
+              }} >Email :</label>
         <input style={{ fontSize: "18px",
-             marginRight: "45px",
+             marginRight: "auto",
               borderRadius: "15px"
                }} type="text" value={form.email} onChange={updateForm("email")} />
      </div>
@@ -70,10 +70,10 @@ const SignIn = () => {
              marginRight: "15px",
              color: "black"
              }}
-        >Password:</label>
+        >Password :</label>
         <input 
         style={{ fontSize: "18px",
-            marginRight: "15px",
+            marginRight: "30px",
              borderRadius: "15px"
               }}
         type="text" value={form.password} onChange={updateForm("password")} />
@@ -85,7 +85,7 @@ const SignIn = () => {
          fontSize: "25px", 
          marginLeft: "18px"}} >Don't have an account?
          <br />
-          <Link style={{color: "yellow"}} to="/register">Register here</Link></p>
+          <Link style={{color: "white"}} to="/register">Register here</Link></p>
      {error && <p style={{ color: "red", fontSize: "14px" }}>{error}</p>}
     </form>
     

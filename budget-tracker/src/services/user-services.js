@@ -27,7 +27,7 @@ export const createUserHandle = async (firstName, lastName, username, uid, email
     uid,
     email,
     phoneNumber,
-    avatarUrl: "https://www.pngall.com/wp-content/uploads/15/King-Julien.png",
+    avatarUrl: "https://thumbs.dreamstime.com/b/green-money-cash-bag-wealth-dollar-sign-rich-finance-logo-343919921.jpg",
     })
 };
 
