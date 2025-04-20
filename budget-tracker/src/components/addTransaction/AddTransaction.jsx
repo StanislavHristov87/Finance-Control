@@ -129,7 +129,7 @@ const AddTransaction = ({ transaction, setTransaction } ) => {
 />
 
         <div>
-        <button type='submit' style={{marginTop: "200px", fontSize: "30px"}}>Add transaction </button>
+        <button type='submit' style={{marginTop: "130px", fontSize: "30px"}}>Add transaction </button>
         </div>
 
     </form>

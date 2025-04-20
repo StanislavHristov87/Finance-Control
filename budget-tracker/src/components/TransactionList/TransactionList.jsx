@@ -32,8 +32,12 @@ import { PieChart, Pie, Cell, Tooltip, Legend } from "recharts";
 
 import { COLORS, EXPENSE_COLORS , BALANCE_COLORS} from "../../data/colors";
 
+import { useNavigate } from "react-router-dom";
+
 
 const TransactionList = ({ transactions }) => {
+
+    const navigate = useNavigate();
   // Смятаме тотали
   const totals = transactions.reduce(
     (acc, transaction) => {
@@ -79,7 +83,9 @@ const TransactionList = ({ transactions }) => {
     { name: 'savedMoney', value: totalSumLeft },
     {name: 'moneySpent', value: totals.expense }      
   ];
-
+  const handleNavigate = () => {
+    navigate("/transactions")
+  }
 
 
   return (
@@ -148,7 +154,7 @@ const TransactionList = ({ transactions }) => {
           <Legend />
         </PieChart>
       </div>
-     
+      <button type="button" onClick={handleNavigate} >new transactions</button>
     </div>
 
     

@@ -15,6 +15,8 @@ import AddTransaction from './components/addTransaction/addTransaction'
 import TransactionList from './components/TransactionList/TransactionList'
 import { onValue, ref } from 'firebase/database'
 import FilteredTransactions from './components/FilteredTransactions/FilteredTransactions'
+import Navbar from './components/Navbar/Navbar'
+import About from './components/About/About'
 
 
 function App() {
@@ -78,8 +80,10 @@ useEffect(() => {
     
     <BrowserRouter>
         <AppContext.Provider value={{...context, setContext }} >
+        {context.user && <Navbar />}
             <Routes>
                 <Route path='/' element={<Home />} />
+                <Route path='/about' element={<About />} />
                 <Route path='/register' element={< Register />} />
                 <Route path='/signin' element={< SignIn />} />
                 <Route path='/profile' element={< Profile />} />
