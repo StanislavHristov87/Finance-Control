@@ -85,8 +85,9 @@ const TransactionList = ({ transactions }) => {
   ];
   const handleNavigate = () => {
     navigate("/transactions")
-  }
+  }     
 
+  let sum = data.find(item => item.name === 'savedMoney').value
 
   return (
     <div style={{ display: "flex", justifyContent: "space-around", marginTop: 50 }}>
@@ -135,6 +136,18 @@ const TransactionList = ({ transactions }) => {
       
       <div>
         <h3 style={{ textAlign: "center", color: "blue" }}>Total sum left</h3>
+            
+       {sum < 0 ? (
+        <h3 style={{color: "red"}} > Your balance is less than 0 ... No money no funny.
+        <br />
+        You need to earn more !!!
+        </h3>
+       ) : (
+        sum < 100 && sum > 0 && (
+          <h3>Your limit is about to finish !</h3>
+        )
+       )}
+        
         <PieChart width={300} height={300}>
           <Pie
             data={data}
@@ -145,7 +158,11 @@ const TransactionList = ({ transactions }) => {
             outerRadius={100}
             label
           >
+            {
+            
+            }
             {data.map((entry, index) => (
+              
               <Cell key={`cell-expense-${index}`}
                fill={BALANCE_COLORS[index % BALANCE_COLORS.length]} />
             ))}

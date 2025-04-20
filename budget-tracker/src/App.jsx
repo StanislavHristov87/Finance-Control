@@ -17,6 +17,7 @@ import { onValue, ref } from 'firebase/database'
 import FilteredTransactions from './components/FilteredTransactions/FilteredTransactions'
 import Navbar from './components/Navbar/Navbar'
 import About from './components/About/About'
+import Footer from './components/Footer/Footer'
 
 
 function App() {
@@ -91,6 +92,7 @@ useEffect(() => {
                 <Route path='/transactionsList' element={<TransactionList transactions={transactions} />} />
                 <Route path='/filteredTransactions' element={<FilteredTransactions transactions={transactions} />} />
             </Routes>
+            <Footer />
         </AppContext.Provider>
     </BrowserRouter>
 
