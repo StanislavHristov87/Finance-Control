@@ -19,7 +19,12 @@ function Home() {
     <div>
 
       {user ? (
+        <>
+        <img style={{marginTop: "28px", borderRadius: "8px"}} src="https://www.teenproblem.net/media/teenproblem/files/articles/576x371/fd8555362997acb4647869782d443928.jpg"
+          alt="Uncle Skruch" />
+
         <h1 style={{color: "black"}} >I hope you are enjoying my app!</h1>
+      </>
       ) : (
 
         <div>

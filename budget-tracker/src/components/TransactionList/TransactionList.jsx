@@ -144,7 +144,7 @@ const TransactionList = ({ transactions }) => {
         </h3>
        ) : (
         sum < 100 && sum > 0 && (
-          <h3>Your limit is about to finish !</h3>
+          <h3 style={{color: "black"}}>Your money are almost finished !</h3>
         )
        )}
         

@@ -3,6 +3,7 @@ import { addTransaction } from "../../services/transaction-services";
 import { useNavigate } from "react-router-dom";
 import { AppContext } from "../../context/AppContext";
 import { useContext } from "react";
+// import './addTransactions.css'
 
 const AddTransaction = ({ transaction, setTransaction } ) => {
 
@@ -36,17 +37,20 @@ const AddTransaction = ({ transaction, setTransaction } ) => {
 
 
   return (
-    <form onSubmit={handleSubmit} 
+    <form  onSubmit={handleSubmit} 
     style={{maxWidth: "400px",
      marginBottom: "200px", 
-     marginTop: "100px" }} >
-        <h1 style={{color: "green", marginBottom: "100px"}} >Adding transactions</h1>
+     marginTop: "100px", 
+     marginLeft: "270px"
+     }} >
+        <h1 style={{color: "BLACK", 
+            marginBottom: "30px"}} >Adding transactions</h1>
 
     <label style={{fontSize: "23px", color: "black", marginRight: "23px"}} >Sum:</label>
     <input 
     type="number" 
     name="sum" 
-    placeholder='Add a sum' 
+    placeholder='' 
     value={transaction.sum} 
     onChange={handleChange} 
     required 
@@ -60,7 +64,8 @@ const AddTransaction = ({ transaction, setTransaction } ) => {
 
     <br />
 
-    <label style={{fontSize: "23px", color: "black", marginRight: "23px"}} >Type of transaction</label>
+    <label style={{fontSize: "23px",
+         color: "black", marginRight: "23px"}} >Type of transaction</label>
     <select 
     name="type" 
     value={transaction.type} 
@@ -76,7 +81,8 @@ const AddTransaction = ({ transaction, setTransaction } ) => {
 
     <br />
 
-    <label style={{fontSize: "23px", color: "black", marginRight: "23px"}} >Category</label>
+    <label style={{fontSize: "23px",
+         color: "black", marginRight: "23px"}} >Category</label>
     <select 
     name="category" 
     value={transaction.category} 
@@ -93,16 +99,18 @@ const AddTransaction = ({ transaction, setTransaction } ) => {
         <option value="rent">Rent</option>
         <option value="transport">Transport</option>
         <option value="entertainment">Entertainment</option>
+        <option value="other expenses">Other expenses</option>
     </select>
 
     <br />
 
-    <label style={{fontSize: "23px", color: "black", marginRight: "23px"}} >Info</label>
+    <label style={{fontSize: "23px",
+         color: "black", marginRight: "23px"}} >Info</label>
     <input 
     type="text" 
     name="info" 
     value={transaction.info} 
-    placeholder='info' 
+    placeholder='' 
     onChange={handleChange}
     style={{
         borderRadius: '38px',
@@ -113,7 +121,8 @@ const AddTransaction = ({ transaction, setTransaction } ) => {
 
         <br />
 
-<label style={{fontSize: "23px", color: "black", marginRight: "23px"}} >Date</label>
+<label style={{fontSize: "23px", 
+    color: "black", marginRight: "23px"}} >Date</label>
 <input 
     type="date" 
     name="date" 
