@@ -87,22 +87,42 @@ import { useNavigate } from "react-router-dom";
         setFile(event.target.files[0]);
     };
 
-    const handleLogout = () => {
-        const auth = getAuth();
-        signOut(auth)
-          .then(() => {
-            navigate("/signin"); // Пренасочване към страницата за вход
-          })
-          .catch((error) => {
-            console.error("Error signing out:", error);
-          });
-      };
+    // const handleLogout = () => {
+    //     const auth = getAuth();
+    //     signOut(auth)
+    //       .then(() => {
+    //         navigate("/signin"); // Пренасочване към страницата за вход
+    //       })
+    //       .catch((error) => {
+    //         console.error("Error signing out:", error);
+    //       });
+    //   };
 
-      const handleNavigate = () => {
+     
+    const handleLogout = async () => {
+        try {
+            const auth = getAuth();
+    
+            if (!auth.currentUser) {
+                console.warn("Потребителят не е влязъл.");
+                return;
+            }
+    
+            await signOut(auth);
+    
+            // Изчистване на контекста след излизане
+            setContext({ user: null, userData: null });
+    
+            navigate("/signin");
+        } catch (error) {
+            console.error("Грешка при logout:", error);
+        }
+    };
+    
+
+    const handleNavigate = () => {
         navigate("/transactions")
       }
-
-
 
   return (
     <form onSubmit={submit} className="profile-form">
