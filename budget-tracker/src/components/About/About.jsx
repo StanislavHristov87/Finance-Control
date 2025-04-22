@@ -4,6 +4,11 @@ import './About.css'
 const About = () => {
   return (
     <div>
+      <img style={{width: "350px", 
+        height: "350px",
+         borderRadius: "8px",
+         marginTop: "10px"
+         }} src="https://cdn.pixabay.com/photo/2023/09/14/10/27/face-logo-8252748_640.png" alt="" />
         <h1 className='about'>
             This is app for people who are not good in saving money !
             <br />

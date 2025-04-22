@@ -44,9 +44,10 @@ const AddTransaction = ({ transaction, setTransaction } ) => {
      marginLeft: "270px"
      }} >
         <h1 style={{color: "BLACK", 
-            marginBottom: "30px"}} >Adding transactions</h1>
+            marginBottom: "30px"}} >Transactions</h1>
 
-    <label style={{fontSize: "23px", color: "black", marginRight: "23px"}} >Sum:</label>
+    <label style={{fontSize: "23px", color: "black",
+         marginRight: "23px"}} >Sum:</label>
     <input 
     type="number" 
     name="sum" 
@@ -65,14 +66,15 @@ const AddTransaction = ({ transaction, setTransaction } ) => {
     <br />
 
     <label style={{fontSize: "23px",
-         color: "black", marginRight: "23px"}} >Type of transaction</label>
+         color: "black", marginRight: "33px"}} >Type:</label>
     <select 
     name="type" 
     value={transaction.type} 
     style={{
         borderRadius: '38px',
-        fontSize: "20px",
-        backgroundColor: "blue"
+        fontSize: "23px",
+        backgroundColor: "blue",
+        width: "210px"
     }}
     onChange={handleChange}>
         <option value="income">Income</option>
@@ -82,14 +84,15 @@ const AddTransaction = ({ transaction, setTransaction } ) => {
     <br />
 
     <label style={{fontSize: "23px",
-         color: "black", marginRight: "23px"}} >Category</label>
+         color: "black", marginRight: "3px"}} >Category:</label>
     <select 
     name="category" 
     value={transaction.category} 
     style={{
         borderRadius: '38px',
         fontSize: "20px",
-        backgroundColor: "blue"
+        backgroundColor: "blue",
+        width: "200px"
     }}
     onChange={handleChange} >
         <option value="salary">Salary</option>
@@ -105,7 +108,7 @@ const AddTransaction = ({ transaction, setTransaction } ) => {
     <br />
 
     <label style={{fontSize: "23px",
-         color: "black", marginRight: "23px"}} >Info</label>
+         color: "black", marginRight: "33px"}} >Info:</label>
     <input 
     type="text" 
     name="info" 
@@ -122,7 +125,7 @@ const AddTransaction = ({ transaction, setTransaction } ) => {
         <br />
 
 <label style={{fontSize: "23px", 
-    color: "black", marginRight: "23px"}} >Date</label>
+    color: "black", marginRight: "33px"}} >Date:</label>
 <input 
     type="date" 
     name="date" 
@@ -133,12 +136,15 @@ const AddTransaction = ({ transaction, setTransaction } ) => {
     style={{
         borderRadius: '38px',
         fontSize: "20px",
-        backgroundColor: "blue"
+        backgroundColor: "blue",
+        width: "210px"
     }}
 />
 
         <div>
-        <button type='submit' style={{marginTop: "130px", fontSize: "30px"}}>Add transaction </button>
+        <button type='submit' style={{marginTop: "70px",
+             fontSize: "20px"
+             }}>Add transaction </button>
         </div>
 
     </form>

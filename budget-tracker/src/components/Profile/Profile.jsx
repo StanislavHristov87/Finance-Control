@@ -116,11 +116,12 @@ import { useNavigate } from "react-router-dom";
         color: "black"
         
         }}
-    >Profile Picture:</label>
+    >Profile</label>
     {userData?.avatarUrl ? (
         <img src={userData.avatarUrl} alt="Avatar" width="100" height="100" style={{ 
             borderRadius: "50%",
-            marginLeft: "50px"
+            marginLeft: "50px",
+            marginTop: "38px"
         
         }} />
     ) : (

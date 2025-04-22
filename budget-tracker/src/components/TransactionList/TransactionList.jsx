@@ -92,7 +92,7 @@ const TransactionList = ({ transactions }) => {
   return (
     <div style={{ display: "flex", justifyContent: "space-around", marginTop: 50 }}>
       <div>
-        <h3 style={{ textAlign: "center", color: "green" }}>Income</h3>
+        <h3 style={{ textAlign: "center", color: "white" }}>Income</h3>
         <PieChart width={300} height={300}>
           <Pie
             data={incomeChart}
@@ -113,7 +113,7 @@ const TransactionList = ({ transactions }) => {
       </div>
 
       <div>
-        <h3 style={{ textAlign: "center", color: "red" }}>Expense</h3>
+        <h3 style={{ textAlign: "center", color: "black" }}>Expense</h3>
         <PieChart width={300} height={300}>
           <Pie
             data={expenseChart}
@@ -135,7 +135,7 @@ const TransactionList = ({ transactions }) => {
 
       
       <div>
-        <h3 style={{ textAlign: "center", color: "blue" }}>Total sum left</h3>
+        <h3 style={{ textAlign: "center", color: "white" }}>Total sum left</h3>
             
        {sum < 0 ? (
         <h3 style={{color: "red"}} > Your balance is less than 0 ... No money no funny.
