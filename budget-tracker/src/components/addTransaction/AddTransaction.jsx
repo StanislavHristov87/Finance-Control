@@ -37,6 +37,13 @@ const AddTransaction = ({ transaction, setTransaction } ) => {
 
 
   return (
+    <div style={{
+        display: "flex",
+  justifyContent: "center",
+  alignItems: "flex-start",
+  marginTop: "10px"
+    }}>
+   
     <form  onSubmit={handleSubmit} 
     style={{maxWidth: "400px",
      marginBottom: "200px", 
@@ -148,6 +155,14 @@ const AddTransaction = ({ transaction, setTransaction } ) => {
         </div>
 
     </form>
+
+    <img style={{borderRadius: "8px",
+         marginLeft: "38px", 
+         width: "300px",
+          height: "300px",
+          marginTop: "130px"
+          }} src="https://p1.hiclipart.com/preview/842/376/950/piggy-bank-finance-saving-money-savings-bank-investment-bank-account-logo-png-clipart.jpg" alt="" />
+    </div>
   )
 }
 

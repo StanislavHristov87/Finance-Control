@@ -217,7 +217,7 @@ import { useNavigate } from "react-router-dom";
         marginTop: "100px",
          marginRight: "50px",
           fontSize: "18px"}}
-          >Save</button>
+          >save</button>
       <button 
       type="button" 
       onClick={handleLogout}
@@ -226,7 +226,7 @@ import { useNavigate } from "react-router-dom";
          marginRight: "50px",
           fontSize: "18px"}}
       
-      >Logout</button>
+      >logout</button>
 
       <button type="button" onClick={handleNavigate} >new transactions</button>
 

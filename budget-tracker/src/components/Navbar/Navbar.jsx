@@ -6,9 +6,10 @@ const Navbar = () => {
   return (
     <nav className='navbar'>
         <Link to="/" >Home</Link>
+        <Link to="profile">Profile</Link>
         <Link to="transactions">New transaction</Link>
         <Link to="/transactionsList">Your list</Link>
-        <Link to="profile">Profile</Link>
+        <Link to="/filteredTransactions">Filter</Link>
         <Link to="about">About the app</Link>
         </nav>
   )

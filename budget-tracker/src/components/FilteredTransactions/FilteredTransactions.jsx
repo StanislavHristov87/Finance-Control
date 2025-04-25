@@ -31,76 +31,82 @@ const FilteredTransactions = ({ transactions }) => {
         setShowResult(true);
     }
 
-   
-
+    const handleBack = () => {
+      setShowResult(false);
+      setFilteredTransactions([]);
+    };
 
 
   return (
     <div style={{ maxWidth: "600px", margin: "auto", padding: "20px" }}>
-      <h1 style={{color: "green", }}>Filter transactions by date</h1>
+      <h1 style={{color: "black"}}>Filter transactions by date</h1>
 
-      <label style={{color: "blue", 
-          fontSize: "28px",
-          cursor: "pointer"
-          }} >Start date:</label>
-      <input
-        type="date"
-        value={startDate}
-        onChange={(e) => setStartDate(e.target.value)}
-        style={{borderRadius: "18px",
-            fontSize: "23px",
-            marginLeft: "28px",
-            marginTop: "50px",
-            cursor: "pointer"
-        }}
-      />
+{!showResult ? (
+  <>
+    <label style={{color: "blue", fontSize: "28px"}}>Start date:</label>
+    <input
+      type="date"
+      value={startDate}
+      onChange={(e) => setStartDate(e.target.value)}
+      style={{
+        borderRadius: "18px", fontSize: "23px", marginLeft: "28px", marginTop: "50px"
+      }}
+    />
+    <br />
 
-      <br />
+    <label style={{color: "black", fontSize: "28px"}}>End date:</label>
+    <input
+      type="date"
+      value={endDate}
+      onChange={(e) => setEndDate(e.target.value)}
+      style={{
+        borderRadius: "18px", fontSize: "23px", marginLeft: "28px", marginTop: "50px"
+      }}
+    />
+    <br />
 
-      <label style={{color: "black", fontSize: "28px", cursor: "pointer"
-      }} >End date:</label>
-      <input
-        type="date"
-        value={endDate}
-        onChange={(e) => setEndDate(e.target.value)}
-        style={{borderRadius: "18px",
-            fontSize: "23px",
-            marginLeft: "28px",
-            marginTop: "50px",
-            cursor: "pointer"
-        }}
-      />
+    <button
+      onClick={handleFilter}
+      style={{marginTop: "100px", fontSize: "23px", backgroundColor: "blue"}}
+    >
+      Show results
+    </button>
+  </>
+) : (
+  <div>
+    <h3 style={{color: "black"}}>Results:</h3>
 
-      <br />
-      <button onClick={handleFilter} style={{marginTop: "200px", 
-      marginBottom: "100px",
-        fontSize: "23px",
-        backgroundColor: "blue",
-        color: ""
-        }} >Show results</button>
-
-      {showResult && (
-        <div >
-          <h3 style={{color: "black"}}>Results:</h3>
-          {filteredTransactions.length === 0 ? (
-            <p>No transactions for this period</p>
-          ) : (
-            filteredTransactions.map((transaction, index) => (
-              <div key={index} style={{ borderBottom: "1px solid #ccc"
-              , 
-               backgroundColor: "black",
-               borderRadius: "18px",
-               color: "yellow"
-              }}>
-                <p><strong>Sum:</strong> {transaction.sum} лв</p>
-                <p><strong>Category:</strong> {transaction.category}</p>
-                <p><strong>Type:</strong> {transaction.type}</p>
-                <p><strong>Date:</strong> {transaction.date}</p>
-              </div>
-            ))
-          )}
+    {filteredTransactions.length === 0 ? (
+      <p>No transactions for this period</p>
+    ) : (
+      filteredTransactions.map((transaction, index) => (
+        <div key={index} style={{
+          borderBottom: "1px solid #ccc",
+          backgroundColor: "blue",
+          borderRadius: "18px",
+          color: "white",
+          marginTop: "10px",
+          padding: "10px"
+        }}>
+          <p><strong>Sum:</strong> {transaction.sum} лв</p>
+          <p><strong>Category:</strong> {transaction.category}</p>
+          <p><strong>Type:</strong> {transaction.type}</p>
+          <p><strong>Date:</strong> {transaction.date}</p>
         </div>
-      )}
+      ))
+    )}
+
+    <button
+      onClick={handleBack}
+      style={{marginTop: "50px", fontSize: "20px", backgroundColor: "black"}}
+    >
+      Back
+    </button>
+  </div>
+)}
+
+
+      
     </div>
   )
 }
