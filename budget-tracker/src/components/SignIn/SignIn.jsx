@@ -38,7 +38,7 @@ const SignIn = () => {
             const userData = snapshot.val()[Object.keys(snapshot.val())[0]];
             setContext({user: credentials.user, userData: userData})
             console.log("User Data before navigate:");
-            navigate("/profile");
+            navigate("/home");
 
         } catch (error) {
             setError("Invalid email or password");

@@ -28,12 +28,14 @@ function Home() {
       ) : (
 
         <div>
-        <h1 style={{color: "red"}} >Welcome to my app for having your smart budget !</h1>
+        <h1 style={{color: "blue"}} >Welcome to my app for having your smart budget !</h1>
+        <img style={{width: "400px", height: "400px", borderRadius: "28px"}} src="https://static.vecteezy.com/system/resources/previews/045/999/477/non_2x/trendy-savings-concepts-vector.jpg" alt="image" />
 
     
-        <p style={{fontSize: "33px", color: "green"}} > Log in to your account
+        <p style={{fontSize: "33px", color: "black"}} > Log in to your account :
           <br />
-          <Link style={{color: "white"}} to="/signin">Sign in</Link></p>
+          <br />
+          <Link style={{color: "blue"}} to="/signin">Click me for sign in</Link></p>
           </div>
       )}
      
